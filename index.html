@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Agenda da Semana - Aline Pantoja</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="workspace" aria-label="Editor da agenda">
+        <div class="preview-panel">
+          <div class="sheet-wrap">
+            <div id="sheet" class="sheet" aria-label="Prévia da agenda">
+              <img class="template" src="assets/template.svg" alt="">
+              <div id="overlay" class="overlay"></div>
+            </div>
+          </div>
+        </div>
+
+        <aside class="controls" aria-label="Controles de edição">
+          <div class="brand-row">
+            <div>
+              <p class="eyebrow">Agenda editável</p>
+              <h1>Aline Pantoja - Nail Designer</h1>
+            </div>
+            <button id="resetBtn" class="icon-btn" type="button" title="Limpar horários" aria-label="Limpar horários">
+              <span aria-hidden="true">↺</span>
+            </button>
+          </div>
+
+          <div class="field-block">
+            <label for="fileName">Nome do arquivo</label>
+            <input id="fileName" type="text" value="agenda-da-semana">
+          </div>
+
+          <div class="days-toolbar" role="group" aria-label="Dias disponíveis">
+            <button class="day-chip" type="button" data-day="Segunda">Seg</button>
+            <button class="day-chip" type="button" data-day="Terça">Ter</button>
+            <button class="day-chip" type="button" data-day="Quarta">Qua</button>
+            <button class="day-chip" type="button" data-day="Quinta">Qui</button>
+            <button class="day-chip" type="button" data-day="Sexta">Sex</button>
+            <button class="day-chip" type="button" data-day="Sábado">Sáb</button>
+          </div>
+
+          <form id="scheduleForm" class="schedule-form"></form>
+
+          <div class="download-row">
+            <button id="jpgBtn" class="primary-btn" type="button">Baixar JPG</button>
+            <button id="pdfBtn" class="secondary-btn" type="button">Baixar PDF</button>
+          </div>
+        </aside>
+      </section>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>
