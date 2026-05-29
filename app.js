@@ -28,7 +28,8 @@ const defaultState = {
     { name: "Quarta", active: true, times: ["08:00", "09:00", "10:00", "14:00", "15:00"] },
     { name: "Quinta", active: true, times: ["08:00", "09:00", "10:00", "14:00", "15:00"] },
     { name: "Sexta", active: true, times: ["08:00", "09:00", "10:00", "14:00", "15:00"] },
-    { name: "Sábado", active: true, times: ["08:00", "09:00", "10:00", "14:00", "15:00"] }
+    { name: "Sábado", active: true, times: ["08:00", "09:00", "10:00", "14:00", "15:00"] },
+    { name: "Domingo", active: true, times: ["08:00", "09:00", "10:00", "14:00", "15:00"] }
   ]
 };
 
@@ -135,7 +136,7 @@ function renderControls() {
 function renderPreview() {
   overlay.innerHTML = "";
 
-  state.days.forEach((day, index) => {
+  state.days.filter((day) => day.active).slice(0, 6).forEach((day, index) => {
     const cardDef = DESIGN.cards[index];
     const card = document.createElement("div");
     card.className = "slot-card";
@@ -154,7 +155,7 @@ function renderPreview() {
     const rowYs = getRowYs(day.times);
 
     day.times.forEach((time, timeIndex) => {
-      if (!day.active || !time.trim()) return;
+      if (!time.trim()) return;
       const row = document.createElement("div");
       row.className = "slot-time";
       row.style.top = `${rowYs[timeIndex]}%`;
@@ -180,8 +181,7 @@ async function renderCanvas() {
   ctx.textAlign = "center";
   ctx.textBaseline = "middle";
 
-  state.days.forEach((day, index) => {
-    if (!day.active) return;
+  state.days.filter((day) => day.active).slice(0, 6).forEach((day, index) => {
     const card = scaleCard(DESIGN.cards[index]);
 
     ctx.save();
@@ -247,7 +247,7 @@ function makePdfWithJpeg(jpegDataUrl, pageW, pageH) {
 function loadState() {
   try {
     const saved = JSON.parse(localStorage.getItem("nail-agenda-state"));
-    if (saved?.days?.length === 6) return saved;
+    if (saved?.days?.length === 7) return saved;
   } catch {
     return structuredClone(defaultState);
   }
@@ -310,7 +310,8 @@ function compactDayName(name) {
     "Quarta": "Qua",
     "Quinta": "Qui",
     "Sexta": "Sex",
-    "Sábado": "Sáb"
+    "Sábado": "Sáb",
+    "Domingo": "Dom"
   };
   return map[name] || name.slice(0, 3);
 }
